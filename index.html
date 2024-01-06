@@ -14,10 +14,7 @@
     <ul>
         <li v-for="assigment in assigments.filter(assigment => ! assigment.status)"  v-bind:class="assigment.status" :key="assigment.id" >{{ assigment.name }} <input v-model="assigment.status" type="checkbox"></li>
     </ul>
-        <form @submit.prevent  = "add" >
-            <input v-model="Newassigment" class="text-black" type="text">
-            <button class="ml-3 bg-green-800" type="submit">Add</button>
-        </form>
+
     </section>
 
 
@@ -27,7 +24,11 @@
         <li v-for="assigment in assigments.filter(assigment => assigment.status)" v-bind:class="assigment.status" :key="assigment.id"  >{{ assigment.name }} <input v-model="assigment.status" type="checkbox"></li>
     </ul>
     </section>
-
+    <form class="mt-10" @submit.prevent  = "add" >
+        <h2> Add new task</h2>
+        <input v-model="Newassigment" class="text-black" type="text">
+        <button class="ml-3 bg-green-800" type="submit">Add</button>
+    </form>
 </div>
 
         <script>
@@ -44,7 +45,12 @@
                 },
                 methods: {
                     add(){
-                        alert (this.Newassigment)
+                        this.assigments.push({
+                        name: this.Newassigment,
+                            status: false,
+                            id: this.assigments.length + 1,
+                        });
+                        this.Newassigment = ''
                     }
                 }
 
