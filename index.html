@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full grid place-items-center ">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style></style>
+</head>
+<body>
+<div id="app">
+    <section v-show="assigments.filter(assigments => ! assigments.status).length">
+    <h1 class="font-bold">Tasks</h1>
+    <ul>
+        <li v-for="assigment in assigments.filter(assigment => ! assigment.status)"  v-bind:class="assigment.status" :key="assigment.id" >{{ assigment.name }} <input v-model="assigment.status" type="checkbox"></li>
+    </ul>
+    </section>
+
+
+    <section v-show="assigments.filter(assigments =>  assigments.status).length">
+    <h2 class="mt-5 font-bold">Finished tasks</h2>
+    <ul>
+        <li v-for="assigment in assigments.filter(assigment => assigment.status)" v-bind:class="assigment.status" :key="assigment.id"  >{{ assigment.name }} <input v-model="assigment.status" type="checkbox"></li>
+    </ul>
+    </section>
+
+</div>
+
+        <script>
+            let app = {
+                data(){
+                    return{
+                        assigments: [
+                            {name: 'First project', status: false, id: 1},
+                            {name: 'Second project', status: false, id: 2},
+                            {name: 'Third project', status: false, id: 3},
+
+                        ]
+
+                    }
+                }
+            }
+            Vue.createApp(app).mount('#app')
+        </script>
+</body>
+</html>
