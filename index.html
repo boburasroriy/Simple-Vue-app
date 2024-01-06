@@ -7,13 +7,17 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style></style>
 </head>
-<body>
+<body class="bg-gray-800 text-white">
 <div id="app">
     <section v-show="assigments.filter(assigments => ! assigments.status).length">
     <h1 class="font-bold">Tasks</h1>
     <ul>
         <li v-for="assigment in assigments.filter(assigment => ! assigment.status)"  v-bind:class="assigment.status" :key="assigment.id" >{{ assigment.name }} <input v-model="assigment.status" type="checkbox"></li>
     </ul>
+        <form @submit.prevent  = "add" >
+            <input v-model="Newassigment" class="text-black" type="text">
+            <button class="ml-3 bg-green-800" type="submit">Add</button>
+        </form>
     </section>
 
 
@@ -34,11 +38,16 @@
                             {name: 'First project', status: false, id: 1},
                             {name: 'Second project', status: false, id: 2},
                             {name: 'Third project', status: false, id: 3},
-
-                        ]
-
+                        ],
+                        Newassigment: ''
+                    }
+                },
+                methods: {
+                    add(){
+                        alert (this.Newassigment)
                     }
                 }
+
             }
             Vue.createApp(app).mount('#app')
         </script>
